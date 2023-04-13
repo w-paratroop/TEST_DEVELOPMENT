@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+// -------------------------------------------------------------
+// project main css
+// -------------------------------------------------------------
+
+// import library setting + mixin + function
+@use "./libs/asset";
+
+// output common classes + reset
+@use "./libs/output";
+
+// font link
+// 読み込むと `index.scss` からのパスになる、記述に注意すること
+// use / import どちらでも可能 - 推奨 `use`
+// scss ファイル 推奨
+@use "../font/fonts.css";
+
+// -------------------------------------------------------------
+// project 設定
+// -------------------------------------------------------------
+body {
+  @include asset.font-smoothing-rendering;
+
+  background: url("../img/bg_bottom@2x.png") no-repeat, url("../img/bg_bottom.png") no-repeat,
+    url("../img/flying_icon_heart.svg");
+}
+
+// title
+h1 {
+  &.title {
+    font-family: TTBold, sans-serif;
+  }
+}
+
+.figure {
+  width: 100%;
+  max-width: 980px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.flex-box {
+  display: flex;
+  gap: 10px;
+  width: 800px;
+}
+
+.flex-child {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 100px;
+  background-color: #efefef;
+  border: 1px solid #000;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  gap: 10px 20px;
+}
+
+.grid-1,
+.grid-2,
+.grid-3 {
+  min-height: 100px;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+.deg45-img {
+  zoom: 1;
+  transform: scale(0.5);
+}
+
+::placeholder {
+  color: green;
+}
+
+.api-categories {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 21px;
+  color: #333;
+}

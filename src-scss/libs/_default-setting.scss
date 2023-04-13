@@ -1,0 +1,134 @@
+// Default setting
+// 基本設定<br>上書きは ../_project_setting.scss で行います
+// dependencies/_style.scss 定義 class はデフォルト出力しません
+// false 設定は出力しません
+// 出力する時は `_project-setting.scss` で override します
+// - body background-color + color + font-family
+//    $out-body-style: false;
+// - body font-size, line-height
+//    $out-font-size: false;
+// - body * line-height by $line-height
+//    $out-body-line-height: false;
+// - box-sizing by $box-sizing
+//    $out-box-sizing: false;
+// - $font-smoothing by $font-smoothing
+//    $out-font-smoothing: false;
+// - font-size 汎用class
+//    $out-common-font-classes: false;
+// - float reset
+//    $out-clearfix: false;
+// - float, left / right
+//    $out-float: false;
+// - align for table, td, th
+//    $out-table: false;
+// - space (gao)
+//    $out-gap: false;
+// - table cell width
+//    $out-table: false;
+// - text style
+//    $out-text-style: false;
+// - hide anchor
+//    $out-skip-link: false;
+// - show / hide
+//    $out-show-hide: false;
+// Styleguide 1.1.1
+
+// with override 可能にするために `!default` 必須
+
+$graceful-usage-threshold: 100 !default;
+$critical-usage-threshold: 100 !default;
+
+// Font
+$font-color: #000 !default;
+$font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
+  sans-serif !default;
+$font-size: 10 !default;
+$line-height: 1.5 !default;
+$default-em: 10px !default;
+
+// Various global styles
+$float: left !default;
+$box-sizing: border-box !default;
+
+// on or off
+$font-smoothing: off !default;
+$bg-color: #fff !default;
+
+// Media Queries
+// mobile width
+$mobile-width: 375 !default; // デザイン幅 375 or 750 or other
+$mobile-max-width: 767 !default; // レスポンシブ mobile max
+
+// desktop width
+$desktop-width: 1200 !default; // コンテンツ部分幅 max width
+
+// tablet width
+$tablet: false !default; // tablet用スタイルが必要な場合はtrueに
+$tablet-width: 980 !default; // タブレット max width
+
+// wrapper flag
+$wrapper: false !default; // 企業テンプレ内構築などで特定のclass等でwrapが必要な場合はtrueに
+$wrapperElem: ".xxxWRAPPERxxx" !default; // wrap用class名（idでも可だがclass推奨）
+
+// Breakpointの数 (1 or 2)で使い分ける
+// 使わない方はコメントアウトする
+// $breakpoints: (
+//   "screen-small": "only screen and (max-width: 1279px)",
+//   "screen-large": "only screen and (min-width: 1280px)",
+// ) !default;
+// $breakpoints: (
+//   "screen-small": "only screen and (max-width: 1279px)",
+//   "screen-medium": "only screen and (min-width: 1280px) and (max-width: 1439px)",
+//   "screen-large": "only screen and (max-width: 1440px)",
+// ) !default;
+// $media-landscape: "only screen and (orientation: landscape)" !default;
+// $media-portrait: "only screen and (orientation: portrait)" !default;
+
+// --------------------------------------------
+// output class
+// dependencies/_style.scss 定義 class はデフォルト出力しません
+// 出力する時は `_project-setting.scss` で override します
+// --------------------------------------------
+// body background-color + color + font-family
+$out-body-style: false !default;
+
+// body font-size, line-height
+$out-font-size: false !default;
+
+// body * line-height by $line-height
+$out-body-line-height: false !default;
+
+// * box-sizing by $box-sizing
+$out-box-sizing: false !default;
+
+// * $font-smoothing by $font-smoothing
+$out-font-smoothing: false !default;
+
+// font-size 汎用class
+$out-common-font-classes: false !default;
+
+// float reset
+$out-clearfix: false !default;
+
+// float, left / right
+$out-float: false !default;
+
+// align for table, td, th
+$out-table: false !default;
+
+// space (gao)
+$out-gap: false !default;
+
+// table cell width
+$out-table: false !default;
+
+// text style
+$out-text-style: false !default;
+
+// show / hide
+$out-show-hide: false !default;
+
+// -------------------------------
+// HTML5 tag setting
+$out-html5: false !default;
+$out-reset: false !default;

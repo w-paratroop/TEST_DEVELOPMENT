@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Webpack App</title>
+  <meta name="format-detection" content="telephone=no">
+  <link href="assets/css/index.css" rel="stylesheet">
+  <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+<h1 class="title">Test@2022/02/18 - 04/07</h1>
+
+<img src="assets/img/A005_C037_09255G_001.jpg" alt="">
+<div class="figure"><img src="assets/img/dummy.jpg" alt=""></div>
+<div id="root"></div>
+
+<div class="flex-box">
+  <div class="flex-child">1</div>
+  <div class="flex-child">2</div>
+  <div class="flex-child">3</div>
+</div>
+
+<div class="grid">
+  <div class="grid-1">1</div>
+  <div class="grid-2">2</div>
+  <div class="grid-3">3</div>
+</div>
+
+<h2>Express Server Test</h2>
+<p>run <code>yarn express</code></p>
+
+<p class="api-categories">
+  <span>/api/v1/categories</span>
+  <label for="api-categories" class="button-label">
+    <input
+      type="button"
+      id="api-categories"
+      value="CATEGORIES"
+      onclick="(function (){
+        fetch('/api/v1/categories')
+      }())"
+    >
+  </label>
+</p>
+
+<p class="api-category-home">
+  <span>/api/v1/articles/category/home</span>
+  <label for="api-category-home" class="button-label">
+    <input
+      type="button"
+      id="api-category-home"
+      value="CATEGORY HOME"
+      onclick="(function (){
+        fetch('/api/v1/articles/category/home')
+      }())"
+    >
+  </label>
+</p>
+
+<p class="api-articles-search">
+  <span>/api/v1/articles/search/xxxxx</span>
+  <label for="api-articles-search" class="button-label">
+    <input
+      type="button"
+      id="api-articles-search"
+      value="ARTICLES SEARCH"
+      onclick="(function (){
+        fetch('/api/v1/articles/search/xxxxx')
+      }())"
+    >
+  </label>
+</p>
+
+<p><a href="./products/radio.html">radio</a></p>
+
+<div class="ssi">
+  <h2 class="ssi-title">SSI section</h2>
+  <code>&lt;!--#include virtual="/resource/inc/ssi.htm"--&gt;</code>
+  <!--#include virtual="/resource/inc/ssi.htm"-->
+</div>
+</body>
+</html>

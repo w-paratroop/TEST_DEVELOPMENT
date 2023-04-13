@@ -1,0 +1,8 @@
+// -------------------------------------------------------------
+// library property
+// import 階層が醜くなるので中間ファイルとして使用します
+// -------------------------------------------------------------
+
+// import library setting
+@forward "src-scss/setting";
+@forward "src-scss/asset";

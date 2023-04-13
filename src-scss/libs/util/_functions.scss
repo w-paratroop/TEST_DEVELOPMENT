@@ -1,0 +1,220 @@
+// setting 依存 function / mixin
+//
+// Compatible in latest Browser
+// Styleguide 2.4.0
+
+@use "sass:math";
+@use "../../setting" as setting;
+
+// -----------------------------------------------------------------------------------
+//  Function to create an optimized svg url
+//  Version: 1.0.6
+//  ref: https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
+//  Helper function to replace characters in a string
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @return if(
+    $index,
+    str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace),
+    $string
+  );
+}
+
+@function svg-url($svg) {
+  //
+  //  Add missing namespace
+  //
+  @if not str-index($svg, xmlns) {
+    $svg: str-replace($svg, "<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+  //
+  //  Chunk up string in order to avoid
+  //  "stack level too deep" error
+  //
+  $encoded: "";
+  $slice: 2000;
+  $index: 0;
+  //$loops: ceil(str-length($svg) / $slice);
+  // DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+  // @see https://sass-lang.com/documentation/breaking-changes/slash-div
+  $loops: math.ceil(math.div(str-length($svg), $slice));
+  @for $i from 1 through $loops {
+    $chunk: str-slice($svg, $index, $index + $slice - 1);
+    //
+    //   Encode
+    //
+    $chunk: str-replace($chunk, '"', "'");
+    $chunk: str-replace($chunk, "%", "%25");
+    $chunk: str-replace($chunk, "#", "%23");
+    $chunk: str-replace($chunk, "{", "%7B");
+    $chunk: str-replace($chunk, "}", "%7D");
+    $chunk: str-replace($chunk, "<", "%3C");
+    $chunk: str-replace($chunk, ">", "%3E");
+
+    //
+    //    The maybe list
+    //
+    //    Keep size and compile time down
+    //    ... only add on documented fail
+    //
+    //  $chunk: str-replace($chunk, '&', '%26');
+    //  $chunk: str-replace($chunk, '|', '%7C');
+    //  $chunk: str-replace($chunk, '[', '%5B');
+    //  $chunk: str-replace($chunk, ']', '%5D');
+    //  $chunk: str-replace($chunk, '^', '%5E');
+    //  $chunk: str-replace($chunk, '`', '%60');
+    //  $chunk: str-replace($chunk, ';', '%3B');
+    //  $chunk: str-replace($chunk, '?', '%3F');
+    //  $chunk: str-replace($chunk, ':', '%3A');
+    //  $chunk: str-replace($chunk, '@', '%40');
+    //  $chunk: str-replace($chunk, '=', '%3D');
+
+    $encoded: #{$encoded}#{$chunk};
+    $index: $index + $slice;
+  }
+  @return url("data:image/svg+xml,#{$encoded}");
+}
+
+// -------------------------------------------------------------
+// vw
+// -------------------------------------------------------------
+// vw
+// 第一引数で対象のサイズ、第二引数で基準となる画面幅を入力
+// $size {number} - 基準サイズ(px)
+// $viewport {number} - 基準画面幅(px)
+// Styleguide 2.3.19
+@function get-vw($size, $viewport) {
+  // DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+  // @see https://sass-lang.com/documentation/breaking-changes/slash-div
+  //$rate: 100 / $viewport;
+  $rate: math.div(100, $viewport);
+
+  @return $rate * $size * 1vw;
+}
+
+// -------------------------------------------------------------
+// fonts
+// -------------------------------------------------------------
+// letter-spacing を計算します
+//
+// $letter-spacing=0 - 設定値, [Number, inline-block]
+// Styleguide 2.1.1
+@function ls($letter-spacing: 0) {
+  @if ($letter-spacing == "inline-block") {
+    @return -0.4em;
+  } @else {
+    @return #{$letter-spacing * 0.001 + "em"};
+  }
+}
+
+// styleguide:ignore:end
+
+// line-height を計算します
+//
+// $line-spacing=1 - font-size に対する line-height gap
+// $font-size=1 - font-size, 単位なし
+// Styleguide 2.1.2
+@function lh($line-spacing: 1, $font-size: 1) {
+  // DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+  // @see https://sass-lang.com/documentation/breaking-changes/slash-div
+  //@return $line-spacing / $font-size;
+  @return math.div($line-spacing, $font-size);
+}
+
+// -------------------------------------------------------------
+// utility
+// -------------------------------------------------------------
+// strip-unit
+// It strips the unit of measure and returns it
+// $num - number
+// Styleguide 2.2.1
+@function strip-unit($num) {
+  // http://sass-lang.com/documentation/Sass/Script/Functions.html#type_of-instance_method
+  // noinspection CssInvalidFunction
+  @if type-of($num) != number {
+    //@warn "#{$num} is not a number.";
+    @return $num;
+  }
+  // DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+  // @see https://sass-lang.com/documentation/breaking-changes/slash-div
+  //@return $num / ($num * 0 + 1);
+  @return math.div($num, 1);
+}
+
+// percent
+// Converts "px" to "%" using the ($)size-base
+// Styleguide 2.2.2
+@function percent($target-value, $base-value: setting.$desktop-width) {
+  // DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+  // @see https://sass-lang.com/documentation/breaking-changes/slash-div
+  //$value: strip-unit($target-value) / strip-unit($base-value) * 100%;
+
+  @return math.div(strip-unit($target-value), strip-unit($base-value)) * 100%;
+}
+
+// VW calc
+// --------------------
+@function mobile-vw($width, $viewport: setting.$mobile-width) {
+  @return get-vw($width, $viewport);
+}
+
+@function desktop-vw($width, $viewport: setting.$desktop-width) {
+  @return get-vw($width, $viewport);
+}
+
+// min(), max(), clamp()
+// --------------------
+// desktop min (最大値指定)
+// ex.
+// width: asset.desktop-min(500);
+// height: asset.desktop-min(300, 1260);
+// font-size: asset.desktop-min(20);
+@function desktop-min($value, $viewport: setting.$desktop-width) {
+  @return min(#{math.div(100, $viewport) * $value}vw, #{$value}px);
+}
+
+// desktop max (最小値指定)
+// ex.
+// width: asset.desktop-max(500);
+// height: asset.desktop-max(300, 1260);
+// font-size: asset.desktop-max(20);
+@function desktop-max($value, $viewport: setting.$desktop-width) {
+  @return max(#{math.div(100, $viewport) * $value}vw, #{$value}px);
+}
+
+// desktop clamp (最小値、最大値指定)
+// ex.
+// width: asset.desktop-clamp(200, 500);
+// height: asset.desktop-clamp(100, 300, 1260);
+// font-size: asset.desktop-clamp(10, 20);
+@function desktop-clamp($minValue, $maxValue, $viewport: setting.$desktop-width) {
+  @return clamp(#{$minValue}px, #{math.div(100, $viewport) * $maxValue}vw, #{$maxValue}px);
+}
+
+// mobile min (最大値指定)
+// ex.
+// width: asset.mobile-min(500);
+// height: asset.mobile-min(300, 750);
+// font-size: asset.mobile-min(20);
+@function mobile-min($value, $viewport: setting.$mobile-width) {
+  @return min(#{math.div(100, $viewport) * $value}vw, #{$value}px);
+}
+
+// mobile max (最小値指定)
+// ex.
+// width: asset.mobile-max(500);
+// height: asset.mobile-max(300, 750);
+// font-size: asset.mobile-max(20);
+@function mobile-max($value, $viewport: setting.$mobile-width) {
+  @return max(#{math.div(100, $viewport) * $value}vw, #{$value}px);
+}
+
+// mobile clamp (最小値、最大値指定)
+// ex.
+// width: asset.mobile-clamp(200, 500);
+// height: asset.mobile-clamp(100, 300, 750);
+// font-size: asset.mobile-clamp(10, 20);
+@function mobile-clamp($minValue, $maxValue, $viewport: setting.$mobile-width) {
+  @return clamp(#{$minValue}px, #{math.div(100, $viewport) * $maxValue}vw, #{$maxValue}px);
+}
