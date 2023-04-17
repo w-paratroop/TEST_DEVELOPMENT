@@ -10,12 +10,12 @@
   <script src="assets/js/index.js" defer></script>
 </head>
 <body>
-<h1 class="title">インライン（再生終了→壁紙ボタン出現）バージョン</h1>
+<h1 class="title">1.インライン（再生終了→壁紙ボタン出現）バージョン</h1>
 <div class="movie" id="movie1">
 </div>
 <div id="movie-sample-insert">
 </div>
-<h1 class="title">モーダル（再生終了→壁紙ボタン出現）バージョン</h1>
+<h1 class="title">2.モーダル（再生終了→壁紙ボタン出現）バージョン</h1>
 <div class="movie-btn" id="movie-btn"><button data-micromodal-trigger="movie__momo" role="button">モーダル</button></div>
 <div id="modal-sample-insert1">
 </div>
@@ -31,9 +31,40 @@
   </div>
 </div>
 <!-- modal -->
-<h1 class="title">インライン（再生終了→ボタンアクティブ）バージョン</h1>
+<h1 class="title">3.インライン（再生終了→ボタンアクティブ）バージョン</h1>
 <div class="movie" id="movie3">
 </div>
 <a class="toggle-poster-btn" id="toggle-poster-btn" href="https://www.youtube.com/">壁紙ボタン</a>
+<h1 class="title">4.モーダル（動画2つ再生終了→壁紙ボタン出現）バージョン</h1>
+<div class="movie-btn" id="movie-btn__ame"><button data-micromodal-trigger="movie__ame" role="button">モーダル1</button></div>
+<div class="movie-btn" id="movie-btn__ball"><button data-micromodal-trigger="movie__ball" role="button">モーダル2</button></div>
+
+<!-- modal -->
+<div id="movie__ame" class="modal" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    <div class="modal__container modal__container__movie">
+      <div class="movie modal-movie" id="movie4"></div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+
+<!-- modal -->
+<div id="movie__ball" class="modal" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    <div class="modal__container modal__container__movie">
+      <div class="movie modal-movie" id="movie5"></div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+
+
+<div id="modal-sample-insert4">
+</div>
+
+
 </body>
 </html>

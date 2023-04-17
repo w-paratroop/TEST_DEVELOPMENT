@@ -37,7 +37,6 @@ player.on('onReady', () => {
 
 const player3 = youtubePlayer('movie3', {
   videoId: 'p5k3Lu96UQQ',
-  playerVars: { loop: 1, controls: 0 },
 });
 
 player3.on('stateChange', (event) => {

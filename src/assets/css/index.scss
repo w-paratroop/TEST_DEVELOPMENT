@@ -31,12 +31,14 @@ h1 {
   &.title {
     margin: 100px 0 50px;
     font-family: TTBold, sans-serif;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 700;
   }
 }
 
 .movie-btn {
+  margin-top: 20px;
+
   button {
     @include asset.reset-form;
 

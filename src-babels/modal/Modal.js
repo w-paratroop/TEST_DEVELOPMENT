@@ -11,11 +11,20 @@ const PlayerState = {
 
 const player2 = youtubePlayer('movie2', {
   videoId: 'QHKhyo70RIw',
-  playerVars: { controls: 0 },
+});
+
+const player4 = youtubePlayer('movie4', {
+  videoId: 'QHKhyo70RIw',
+});
+
+const player5 = youtubePlayer('movie5', {
+  videoId: 'p5k3Lu96UQQ',
 });
 
 let insertBtn = '<a class="poster-btn" href="https://www.youtube.com/">壁紙ボタン</a>';
 let done = false;
+let momoDone = false;
+let ballDone = false;
 
 player2.on('stateChange', (event) => {
   if (event.data === PlayerState.ENDED) {
@@ -36,15 +45,57 @@ player2.on('onReady', () => {
   });
 });
 
-// const closeModal = () => {
-//   MicroModal.close('movie__momo');
-// }
+player4.on('stateChange', (event) => {
+  if (event.data === PlayerState.ENDED) {
+    console.log('end');
+    if (ballDone) {
+      insertText4();
+    }
+    momoDone = true;
+  }
+});
+
+player4.on('onReady', () => {
+  player4.cuePlaylist({
+    listType: 'playlist',
+    playlist: ['QHKhyo70RIw'],
+    index: 0,
+    startSeconds: 0,
+    suggestedQuality: 'small',
+  });
+});
+
+player5.on('stateChange', (event) => {
+  if (event.data === PlayerState.ENDED) {
+    console.log('end');
+    if (momoDone) {
+      insertText4();
+    }
+    ballDone = true;
+  }
+});
+
+player5.on('onReady', () => {
+  player5.cuePlaylist({
+    listType: 'playlist',
+    playlist: ['QHKhyo70RIw'],
+    index: 0,
+    startSeconds: 0,
+    suggestedQuality: 'small',
+  });
+});
 
 const insertText = () => {
   let text1 = document.getElementById('modal-sample-insert1');
   let text2 = document.getElementById('modal-sample-insert2');
   text1.innerHTML = insertBtn;
   text2.innerHTML = insertBtn;
+};
+
+const insertText4 = () => {
+  let text4 = document.getElementById('modal-sample-insert4');
+  3;
+  text4.innerHTML = insertBtn;
 };
 
 /**
@@ -66,6 +117,8 @@ const microModalInit = () => {
  */
 const modalInit = () => {
   player2;
+  player4;
+  player5;
   microModalInit();
 };
 
