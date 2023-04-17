@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Webpack App</title>
+  <meta name="format-detection" content="telephone=no">
+  <link href="assets/css/index.css" rel="stylesheet">
+  <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+<h1 class="title">インライン（再生終了→壁紙ボタン出現）バージョン</h1>
+<div class="movie" id="movie1">
+</div>
+<div id="movie-sample-insert">
+</div>
+<h1 class="title">モーダル（再生終了→壁紙ボタン出現）バージョン</h1>
+<div class="movie-btn" id="movie-btn"><button data-micromodal-trigger="movie__momo" role="button">モーダル</button></div>
+<div id="modal-sample-insert1">
+</div>
+<!-- modal -->
+<div id="movie__momo" class="modal" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    <div class="modal__container modal__container__movie">
+      <div class="movie modal-movie" id="movie2"></div>
+      <div id="modal-sample-insert2">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<h1 class="title">インライン（再生終了→ボタンアクティブ）バージョン</h1>
+<div class="movie" id="movie3">
+</div>
+<a class="toggle-poster-btn" id="toggle-poster-btn" href="https://www.youtube.com/">壁紙ボタン</a>
+</body>
+</html>

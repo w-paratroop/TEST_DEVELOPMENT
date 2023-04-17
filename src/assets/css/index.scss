@@ -15,6 +15,7 @@
 // use / import どちらでも可能 - 推奨 `use`
 // scss ファイル 推奨
 @use "../font/fonts.css";
+@forward "__modal/micromodal";
 
 // -------------------------------------------------------------
 // project 設定
@@ -22,69 +23,116 @@
 body {
   @include asset.font-smoothing-rendering;
 
-  background: url("../img/bg_bottom@2x.png") no-repeat, url("../img/bg_bottom.png") no-repeat,
-    url("../img/flying_icon_heart.svg");
+  margin: 100px 20px;
 }
 
 // title
 h1 {
   &.title {
+    margin: 100px 0 50px;
     font-family: TTBold, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
   }
 }
 
-.figure {
-  width: 100%;
-  max-width: 980px;
+.movie-btn {
+  margin-top: 20px;
 
-  img {
-    width: 100%;
+  button {
+    @include asset.reset-form;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    background: darkcyan;
+    border-radius: 100vh;
   }
 }
 
-.flex-box {
+.poster-btn {
   display: flex;
-  gap: 10px;
-  width: 800px;
-}
-
-.flex-child {
-  display: flex;
-  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 100px;
-  background-color: #efefef;
-  border: 1px solid #000;
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  background: orange;
+  border-radius: 100vh;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 200px 200px 200px;
-  gap: 10px 20px;
+.toggle-poster-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  pointer-events: none;
+  background: grey;
+  border-radius: 100vh;
+
+  &.active {
+    pointer-events: all;
+    cursor: pointer;
+    background: orange;
+  }
 }
 
-.grid-1,
-.grid-2,
-.grid-3 {
-  min-height: 100px;
-  border: 1px solid #333;
-  border-radius: 5px;
+// -------------------------------------------------------------
+// desktop
+@include asset.desktop {
+  .movie {
+    width: 100%;
+    max-width: 560px;
+    height: calc(50vw * 0.75);
+    max-height: 315px;
+
+    iframe {
+      width: 100%;
+    }
+  }
+
+  .modal__container {
+    .movie {
+      width: 100%;
+      max-width: 940px;
+      height: calc(50vw * 0.75);
+      max-height: 560px;
+    }
+  }
 }
 
-.deg45-img {
-  zoom: 1;
-  transform: scale(0.5);
-}
+// -------------------------------------------------------------
+// mobile
+@include asset.mobile {
+  .movie {
+    width: 100%;
 
-::placeholder {
-  color: green;
-}
+    iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+  }
 
-.api-categories {
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-size: 21px;
-  color: #333;
+  .modal__container {
+    .movie {
+      iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
+    }
+  }
 }
